@@ -1,0 +1,63 @@
+{
+  "manifest_version": 3,
+  "name": "MS Teams Transcript Downloader",
+  "version": "1.0.0",
+  "description": "Download and decrypt MS Teams meeting transcripts in 1 of 3 formats.",
+  "permissions": [
+    "webRequest",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "https://*.sharepoint.com/*",
+    "https://*.office.com/*",
+    "https://teams.microsoft.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.sharepoint.com/*",
+        "https://*.office.com/*",
+        "https://teams.microsoft.com/*"
+      ],
+      "js": ["intercept.js", "content.js"],
+      "css": ["modal.css"],
+      "run_at": "document_start",
+      "all_frames": true,
+      "world": "MAIN"
+    },
+    {
+      "matches": [
+        "https://*.sharepoint.com/*",
+        "https://*.office.com/*",
+        "https://teams.microsoft.com/*"
+      ],
+      "js": ["content.js"],
+      "css": ["modal.css"],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["intercept.js"],
+      "matches": [
+        "https://*.sharepoint.com/*",
+        "https://*.office.com/*",
+        "https://teams.microsoft.com/*"
+      ]
+    }
+  ]
+}

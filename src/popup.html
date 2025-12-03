@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MS Teams Transcript Downloader</title>
+  <style>
+    body {
+      width: 350px;
+      min-height: 200px;
+      padding: 16px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      font-size: 14px;
+      line-height: 1.5;
+      color: #333;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 16px 0;
+      color: #5b5fc7;
+    }
+
+    .status {
+      padding: 12px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status.active {
+      background-color: #e8f5e9;
+      border: 1px solid #4caf50;
+      color: #2e7d32;
+    }
+
+    .status.inactive {
+      background-color: #fff3e0;
+      border: 1px solid #ff9800;
+      color: #e65100;
+    }
+
+    .status-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .status-icon.active {
+      background-color: #4caf50;
+    }
+
+    .status-icon.inactive {
+      background-color: #ff9800;
+    }
+
+    .section {
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: #555;
+    }
+
+    .info-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .info-label {
+      color: #666;
+    }
+
+    .info-value {
+      font-weight: 500;
+      color: #333;
+    }
+
+    .instructions {
+      background-color: #f5f5f5;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .instructions ol {
+      margin: 8px 0;
+      padding-left: 20px;
+    }
+
+    .instructions li {
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      margin-top: 20px;
+      padding-top: 12px;
+      border-top: 1px solid #eee;
+      font-size: 12px;
+      color: #999;
+      text-align: center;
+    }
+
+    .version {
+      font-weight: 500;
+    }
+
+    .format-select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .format-select:focus {
+      outline: none;
+      border-color: #5b5fc7;
+    }
+  </style>
+</head>
+<body>
+  <h1>🎙️ MS Teams Transcript Downloader</h1>
+
+  <div id="status-container">
+    <div class="status inactive">
+      <span class="status-icon inactive"></span>
+      <span id="status-text">Checking status...</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Extension Status</div>
+    <div class="info-item">
+      <span class="info-label">Transcript URL Captured:</span>
+      <span class="info-value" id="transcript-status">No</span>
+    </div>
+    <div class="info-item">
+      <span class="info-label">Requests Monitored:</span>
+      <span class="info-value" id="requests-count">0</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Default Download Format</div>
+    <select id="defaultFormat" class="format-select">
+      <option value="json">RAW MS Stream JSON (.json)</option>
+      <option value="vtt">WebVTT (.vtt)</option>
+      <option value="vtt-grouped">VTT Grouped (_grouped.txt)</option>
+    </select>
+    <p style="font-size: 12px; color: #666; margin-top: 8px;">
+      This sets the pre-selected format in the download dialog.
+    </p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">How to Use</div>
+    <div class="instructions">
+      <ol>
+        <li>Navigate to a MS Teams meeting recording with transcript</li>
+        <li>Open the transcript viewer in the meeting</li>
+        <li>Look for the blue "Download" button which will have replaced the existing disabled download button</li>
+        <li>Click the button to download the transcript in 1 of 3 available formats.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="version">Version 1.0.0</div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
